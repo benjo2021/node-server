@@ -44,8 +44,7 @@ class Server {
   public routes(serverApp:express.Application,routerLink:express.Router){
     serverApp.use(( req:Request, res:Response, next : NextFunction)=>{
             if(!serverApp.get("mongoConnection")){
-                const conString = req.originalUrl.split("/")[1] === "test" ?
-                Config.MONGO_CON_URL_TEST : Config.MONGO_CON_URL;
+                const conString =  Config.MONGO_CON_URL;
             } else{
 
             }
