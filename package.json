@@ -10,9 +10,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/body-parser": "^1.17.0",
+    "@types/express": "github:types/express",
     "@types/typescript": "^2.0.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
+    "tslint": "^5.11.0",
     "typescript": "^3.0.3"
   }
 }
