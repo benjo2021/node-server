@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "mongodb": "mongodb --dbpath=C:\\Program Files\\MongoDB\\Server\\4.0\\bin",
-    "start": " tsc w && npm run mongo"
+    "mongo": "mongodb --dbpath=C:\\Program Files\\MongoDB\\Server\\4.0\\bin\\",
+    "start": " tsc -watch && npm run mongo" 
+    
   },
   "keywords": [],
   "author": "",
