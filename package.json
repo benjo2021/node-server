@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "mongo": "mongodb --dbpath=C:\\Program Files\\MongoDB\\Server\\4.0\\bin\\",
-    "start": " tsc -watch && npm run mongo" 
-    
+    "nodemon": "wait-on ./build/index.js && nodemon ./build/index/js",
+    "start": "concurrently --kill-others \" rimraf ./build\" \" npm run mongo\" \"tsc -watch \" \"npm run nodemon\" "
   },
   "keywords": [],
   "author": "",
@@ -14,10 +14,17 @@
   "dependencies": {
     "@types/body-parser": "^1.17.0",
     "@types/express": "github:types/express",
+    "@types/mongoose": "^5.2.17",
     "@types/typescript": "^2.0.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
+    "mongoose": "^5.2.17",
+    "nodemon": "^1.18.4",
     "tslint": "^5.11.0",
     "typescript": "^3.0.3"
+  },
+  "devDependencies": {
+    "concurrently": "^4.0.1",
+    "rimraf": "^2.6.2"
   }
 }

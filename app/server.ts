@@ -1,9 +1,8 @@
 import express, { NextFunction, Request, Response } from "express";
 import bodyParser from "body-parser";
-import path from "path";
-import http from "http";
 import Routes from "./router";
-import {Config} from "./config";
+import { Config } from "./config";
+import { connect, Mongoose } from "mongoose";
 
 class Server {
   public serverApp: express.Application;
@@ -23,11 +22,12 @@ class Server {
         parameterLimit: 100000000
       })
     );
+
     serverApp.use((req: Request, res: Response, next: NextFunction) => {
       res.header("Access-Control-Allow-Origin:", "*");
       res.header(
         "Access-Control-Allow-Headers:",
-        "Origin, X-Requested-Widrh, Content-Type,Accept, Authorization"
+        "Origin, X-Requested-Width, Content-Type,Accept, Authorization"
       );
       res.header("Access-Control-Allow-Credentials:", "true");
 
@@ -36,21 +36,23 @@ class Server {
         res.header("Access-Control-Allow-Methods", "GET,POST,PATCH,DELETE,PUT");
         res.send(200);
       } else {
-
+        next();
       }
     });
   }
 
-  public routes(serverApp:express.Application,routerLink:express.Router){
-    serverApp.use(( req:Request, res:Response, next : NextFunction)=>{
-            if(!serverApp.get("mongoConnection")){
-                const conString =  Config.MONGO_CON_URL;
-            } else{
-
-            }
-    }) ;
+  public routes(serverApp: express.Application, routerLink: express.Router) {
+    serverApp.use(async (req: Request, res: Response, next: NextFunction) => {
+      if (!serverApp.get("mongoConnection")) {
+        const conString = Config.MONGO_CON_URL || "http://localhost:3333/",
+          conn = await connect(conString);
+        serverApp.set("mongoConnection",conn);
+      } else {
+        next();
+      }
+    });
+    serverApp.use("/api/",routerLink)
   }
-
 
   /*  // API file for interacting with MongoDB
     const api = Routes;
