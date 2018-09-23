@@ -1,4 +1,4 @@
-import express, { NextFunction, Request, Response } from "express";
+import express, { NextFunction, Request, Response } from 'express';
 import bodyParser from "body-parser";
 import Routes from "./router";
 import { Config } from "./config";
@@ -6,7 +6,7 @@ import { connect, Mongoose } from "mongoose";
 
 class Server {
   public serverApp: express.Application;
-  private appRouter: Routes;
+  private appRouter = new Routes(this.serverApp);
 
   constructor() {
     this.serverApp = express();

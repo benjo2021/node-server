@@ -9,7 +9,7 @@ class App {
   async initializeApp() {
     try {
       const app = http.createServer(Server.serverApp).listen(this.port, () => 
-        this.onListen(app.address()));
+        this.onListen(app.address())     );
     } catch (error) {}
   }
 
