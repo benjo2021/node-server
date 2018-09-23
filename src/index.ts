@@ -2,36 +2,35 @@ import http from "http";
 import Server from "./server";
 
 class App {
-  constructor(private port?: number) {
-    this.port = this.normalizeport(process.env.port || 3333);
-  }
-
-  async initializeApp() {
-    try {
-      const app = http.createServer(Server.serverApp).listen(this.port, () => 
-        this.onListen(app.address())     );
-    } catch (error) {}
-  }
-
-  onListen(addres: any) {
-    console.log(`listening on ${this.port}`);
-  }
-
-  error(error: any) {
-    if (
-      error.syscall !== "listen" ||
-      error.code != "EACCESS" ||
-      error.coden != "ADDRIUSE"
-    ) {
-      throw error;
+    constructor(private port?: number) {
+        this.port = this.normalizeport(process.env.port || 3333);
     }
-  }
 
-  normalizeport(num: any) {
-    const port = parseInt(num, 10);
+    async initializeApp() {
+        try {
+            const serverApp = Server.serverApp;
+            const app = http.createServer(serverApp).listen(this.port, () => this.onListen(app.address()));
+        } catch (error) {
+            this.error(error);
+        }
+    }
 
-    return isNaN(port) ? num : port;
-  }
+    onListen(address: any) {
+        console.log(`Litening on ${this.port}`);
+    }
+
+    error(error: any) {
+        if (error.syscall !== "listen" || error.code !== "EACCES" || error.coden !== "EADDRINUSE") {
+            throw error;
+        }
+    }
+
+    normalizeport(num: any) {
+        const port = parseInt(num, 10);
+        return isNaN(port) ? num : port;
+    }
+
+
 }
 
 new App().initializeApp();

@@ -1,9 +1,8 @@
-import  express  from "express";
+import express from "express";
 
-
-class Routes{
-    constructor(serverApp: express.Application){
-    
+class Routes {
+    constructor(serverApp: express.Application) {
+        console.log("test");
     }
 }
 
