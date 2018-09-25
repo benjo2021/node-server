@@ -13,6 +13,7 @@ class App {
     } catch (error) {
       this.error(error);
       console.log(error);
+      console.log(error);
     }
   }
 
