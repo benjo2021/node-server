@@ -8,21 +8,19 @@ class App {
 
   async initializeApp() {
     try {
-      const app = http.createServer(Server.serverApp).listen(this.port, () => 
-        this.onListen(app.address())     );
-    } catch (error) {}
+      const serverApp = Server.serverApp;
+      const app = http.createServer(serverApp).listen(this.port, () => this.onListen( app.address() ) );
+    } catch (error) {
+      this.error(error);
+    }
   }
 
-  onListen(addres: any) {
+  onListen(address: any) {
     console.log(`listening on ${this.port}`);
   }
 
   error(error: any) {
-    if (
-      error.syscall !== "listen" ||
-      error.code != "EACCESS" ||
-      error.coden != "ADDRIUSE"
-    ) {
+    if ( error.syscall !== "listen" || error.code !== "EACCESS" || error.coden !== "ADDRINUSE") {
       throw error;
     }
   }

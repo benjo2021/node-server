@@ -1,12 +1,12 @@
-import express, { NextFunction, Request, Response } from 'express';
+import express, { NextFunction, Response, Request } from "express";
 import bodyParser from "body-parser";
 import Routes from "./router";
 import { Config } from "./config";
 import { connect, Mongoose } from "mongoose";
 
 class Server {
-  public serverApp: express.Application;
-  private appRouter = new Routes(this.serverApp);
+  public serverApp : express.Application;
+  appRouter : Routes;
 
   constructor() {
     this.serverApp = express();
@@ -24,11 +24,8 @@ class Server {
     );
 
     serverApp.use((req: Request, res: Response, next: NextFunction) => {
-      res.header("Access-Control-Allow-Origin:", "*");
-      res.header(
-        "Access-Control-Allow-Headers:",
-        "Origin, X-Requested-Width, Content-Type,Accept, Authorization"
-      );
+      res.header("Access-Control-Allow-Origin", "*");
+      res.header("Access-Control-Allow-Headers",        "Origin, X-Requested-Width, Content-Type,Accept, Authorization" );
       res.header("Access-Control-Allow-Credentials:", "true");
 
       //intercept OPTIONS Method
@@ -41,44 +38,20 @@ class Server {
     });
   }
 
-  public routes(serverApp: express.Application, routerLink: express.Router) {
+  public routes(serverApp: express.Application, routerlink: express.Router) {
     serverApp.use(async (req: Request, res: Response, next: NextFunction) => {
       if (!serverApp.get("mongoConnection")) {
-        const conString = Config.MONGO_CON_URL || "http://localhost:3333/",
-          conn = await connect(conString);
+        const conString = Config.MONGO_CON_URL || "http://localhost:3333/";
+        const  conn = await connect(conString);
         serverApp.set("mongoConnection",conn);
-      } else {
+      } 
         next();
-      }
+      
     });
-    serverApp.use("/api/",routerLink)
+    serverApp.use("/api/",routerlink);
   }
 
-  /*  // API file for interacting with MongoDB
-    const api = Routes;
-
-    // Parsers
-    app.use(bodyParser.json());
-    app.use(bodyParser.urlencoded({ extended: false }));
-
-    // Angular DIST output folder
-    app.use(express.static(path.join(__dirname, "dist")));
-
-    // API location
-    app.use("/api", api);
-
-    // Send all other requests to the Angular app
-    app.get("*", (req, res) => {
-      res.sendFile(path.join(__dirname, "dist/index.html"));
-    });
-
-    //Set Port
-    const port = process.env.PORT || "3000";
-    app.set("port", port);
-
-    const server = http.createServer(app);
-
-    server.listen(port, () => console.log(`Running on localhost:${port}`)); */
+  
 }
 
 export default new Server();
