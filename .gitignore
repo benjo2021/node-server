@@ -1,3 +1,7 @@
 node_modules/
-*.js
 build/
+*.js
+<<<<<<< HEAD
+build/
+=======
+>>>>>>> 1f4bd1b7113f5e591cef6577bb6b167a358ee447
