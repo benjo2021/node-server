@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "mongo": "mongod --dbpath=C:\\Program Files\\MongoDB\\Server\\4.0\\bin\\",
+    "mongo": "mongod --dbpath=C:\\MongoDB\\Server\\4.0\\bin\\",
     "nodemon": "wait-on ./build/index.js && nodemon ./build/index.js",
     "start": "concurrently \"rimraf build\" \"tsc -w\" \"npm run mongo\" \"npm run nodemon\" "
   },
