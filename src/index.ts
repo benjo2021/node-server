@@ -12,6 +12,7 @@ class App {
       const app = http.createServer(serverApp).listen(this.port, () => this.onListen( app.address() ) );
     } catch (error) {
       this.error(error);
+      console.log(error);
     }
   }
 
