@@ -12,6 +12,7 @@ app.use(bodyParser.json());
 mongoose.connect("mongodb://localhost/test");
 const db = mongoose.connection;
 
+// ROUTES
 app.get("/", (req, res) => {
   res.status(404).send("Invalid route/s!!!");
 });
@@ -46,14 +47,7 @@ app.put("/api/user/:_id", (req, res) => {
   });
 });
 
-/* app.delete("/api/user/:_id", (req, res) => {
-  var id = req.params._id;
-  user.removeUser(id, (err: any, user: any) => {
-    if (err) {
-      throw err;
-    }
-    res.json(User);
-  });
-}); */
+// FOR TEST
+app.delete("/api/user/:_id", (req, res) => {});
 
 app.listen(3000, () => console.log("Listening on port 3000..."));
