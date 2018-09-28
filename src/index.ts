@@ -14,7 +14,7 @@ const db = mongoose.connection;
 
 // ROUTES
 app.get("/", (req, res) => {
-  res.status(404).send("Invalid route/s!!!");
+  res.status(404).json({ message: "Invalid route/s!!!" });
 });
 
 app.get("/api/user", (req, res) => {
