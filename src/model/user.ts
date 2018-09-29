@@ -33,14 +33,23 @@ export class User {
   }
 
   addUsers(genre: any, cb: any) {
+    
     this.model.create(genre, cb);
+    
   }
 
-  updateUsers(id: any, genre: any, options: any, cb: any) {
-    var query = { _id: id };
-    var update = {
-      name: genre.name,
-    };
+  updateUsers(id: any, user: any, options: any, cb: any) {
+    var query = { _id: id },
+    {name,type,password,username}=user,
+      update={name,type,password,username};
+    
     this.model.findOneAndUpdate(query, update, options, cb);
   }
+
+  deleteUsers(id: any, cb: any) {
+    console.log(id);
+    var query = { _id: id };
+    this.model.remove(query,cb);
+  }
+
 }

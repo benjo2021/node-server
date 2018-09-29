@@ -53,6 +53,17 @@ app.put("/api/user/:_id", (req, res) => {
 });
 
 // FOR TEST
-app.delete("/api/user/:_id", (req, res) => {});
+  app.delete("/api/user/:_id", (req, res) => {
+  var id = req.params._id;
+  var User = req.body;
+  
+  user.deleteUsers(id, (err: any, user: any) => {
+    if (err) {
+      res.json(err);
+    }
+    res.json("test");
+  });
 
-app.listen(3000, () => console.log("Listening on port 3000..."));
+});
+
+app.listen(5000, () => console.log("Listening on port 5000..."));
