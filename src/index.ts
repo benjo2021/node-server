@@ -61,7 +61,7 @@ app.delete("/api/user/:_id", (req, res) => {
 		if(err){
 			res.json(err);
 		}
-		res.json(genre);
+		res.json({message : "Delete successful!!!"});
 	});
 });
 
