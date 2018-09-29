@@ -3,23 +3,24 @@ import { Schema, model } from "mongoose";
 const genreSchema = new Schema({
   name: {
     type: String,
-    required: true,
+    required: true
   },
   type: {
     type: String,
-    required: true,
+    required: true
   },
   username: {
     type: String,
-    required: true,
+    required: true
   },
   password: {
     type: String,
+    required: true
   },
-  create_date: {
+  date: {
     type: Date,
-    default: Date.now,
-  },
+    default: Date.now
+  }
 });
 
 export class User {
@@ -37,10 +38,19 @@ export class User {
   }
 
   updateUsers(id: any, genre: any, options: any, cb: any) {
-    var query = { _id: id };
-    var update = {
-      name: genre.name,
-    };
+    const query = { _id: id },
+      { name, type, password, username } = genre,
+      update = {
+        name,
+        type,
+        password,
+        username
+      };
     this.model.findOneAndUpdate(query, update, options, cb);
+  }
+
+  deleteUser(id, cb) {
+    var query = { _id: id };
+    this.model.remove(query, cb);
   }
 }

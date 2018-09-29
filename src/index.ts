@@ -11,8 +11,10 @@ app.use(bodyParser.json());
 // app.use(morgan("dev"));
 
 // Connect to Mongoose
+const conn =
+  "mongodb://test:test123@test-shard-00-00-bfhcp.mongodb.net:27017,test-shard-00-01-bfhcp.mongodb.net:27017,test-shard-00-02-bfhcp.mongodb.net:27017/test?ssl=true&replicaSet=Test-shard-0&authSource=admin&retryWrites=true";
 mongoose.connect(
-  "mongodb://localhost/test",
+  conn,
   { useNewUrlParser: true }
 );
 const db = mongoose.connection;
@@ -53,6 +55,14 @@ app.put("/api/user/:_id", (req, res) => {
 });
 
 // FOR TEST
-app.delete("/api/user/:_id", (req, res) => {});
+app.delete("/api/user/:_id", (req, res) => {
+    var id = req.params._id;
+	user.deleteUser(id, (err, genre) => {
+		if(err){
+			res.json(err);
+		}
+		res.json(genre);
+	});
+});
 
 app.listen(3000, () => console.log("Listening on port 3000..."));

@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "mongo": "mongod --dbpath=C:\\MongoDB\\",
+    "mongo": "mongod",
     "nodemon": "wait-on ./build/index.js && nodemon ./build/index.js",
     "start": "concurrently \"rimraf build\" \"tsc -w\" \"npm run mongo\" \"npm run nodemon\" \"pm2 start ./build/index.js\"",
-    "stop" : "pm2 stop all && pm2 delete all"
+    "stop": "pm2 stop all && pm2 delete all"
   },
   "keywords": [],
   "author": "",
