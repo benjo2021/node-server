@@ -6,15 +6,18 @@
   "scripts": {
     "mongo": "mongod --dbpath=C:\\MongoDB\\",
     "nodemon": "wait-on ./build/index.js && nodemon ./build/index.js",
-    "start": "concurrently \"rimraf build\" \"tsc -w\" \"npm run mongo\" \"npm run nodemon\" "
+    "start": "concurrently \"rimraf build\" \"tsc -w\" \"npm run mongo\" \"npm run nodemon\" \"pm2 start ./build/index.js\"",
+    "stop" : "pm2 stop all && pm2 delete all"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.3",
+    "@types/morgan": "^1.7.35",
     "body-parser": "^1.18.3",
+    "express": "^4.16.3",
     "mongoose": "^5.2.17",
+    "morgan": "^1.9.1",
     "nodemon": "^1.18.4",
     "typescript": "^3.0.3"
   },
