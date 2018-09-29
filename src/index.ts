@@ -19,6 +19,19 @@ mongoose.connect(
 );
 const db = mongoose.connection;
 
+app.use((req: any, res: any, next: any) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+    res.header("Access-Control-Allow-Credentials", "true");
+
+    // Intercept OPTIONS method
+    if (req.method === "OPTIONS") {
+      res.header("Access-Control-Allow-Methods", "GET,PATCH,POST,PUT,DELETE");
+      res.send(200);
+    } else {
+      next();
+    }
+  });
 // ROUTES
 app.get("/", (req, res) => {
   res.status(404).json({ message: "Invalid route/s!!!" });
