@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
 
-const genreSchema = new Schema({
+const userSchema = new Schema({
   name: {
     type: String,
     required: true
@@ -26,20 +26,20 @@ const genreSchema = new Schema({
 export class User {
   model: any;
   constructor() {
-    this.model = model("User", genreSchema);
+    this.model = model("User", userSchema);
   }
 
   getUsers(cb: any, limit?: any) {
     this.model.find(cb).limit(limit);
   }
 
-  addUsers(genre: any, cb: any) {
-    this.model.create(genre, cb);
+  addUsers(user: any, cb: any) {
+    this.model.create(user, cb);
   }
 
-  updateUsers(id: any, genre: any, options: any, cb: any) {
+  updateUsers(id: any, user: any, options: any, cb: any) {
     const query = { _id: id },
-      { name, type, password, username } = genre,
+      { name, type, password, username } = user,
       update = {
         name,
         type,
